@@ -1,3 +1,6 @@
+# -*- coding: utf8 -*-
+"""数据模型"""
+
 from run import db
 
 class UsersWeixin(db.Model):

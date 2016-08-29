@@ -1,4 +1,5 @@
-
+# -*- coding: utf8 -*-
+"""配置文件"""
 
 SQLALCHEMY_DATABASE_URI = "DB_URI"
 

@@ -1,3 +1,6 @@
+# -*- coding: utf8 -*-
+"""微信登陆相关方法"""
+
 from flask import Markup, redirect, request, jsonify
 import requests
 
@@ -11,6 +14,7 @@ from run import app
 
 
 def check_user(third_id):
+    '''根据第三方id检查关联表中是否存在当前用户，目前根据openid检查'''
     user_info = UsersWeixin.query.filter_by(openid=weixin_id)
     if user_info.count():
         return True
@@ -20,6 +24,7 @@ def check_user(third_id):
 
 @wx_user.route("/authorization")
 def authorization():
+    '''用户验证'''
     code = request.args.get('code')
     api = WeixinAPI(appid=APP_ID,
                     app_secret=APP_SECRET,
@@ -39,6 +44,7 @@ def authorization():
 
 @wx_user.route("/login")
 def login():
+    '''获取用户信息'''
     api = WeixinAPI(appid=APP_ID,
                     app_secret=APP_SECRET,
                     redirect_uri=REDIRECT_URI)
@@ -48,4 +54,5 @@ def login():
 
 @wx_user.route("/test")
 def hello():
+    '''测试方法'''
     return Markup('<a href="%s">weixin login!</a>') % '/login'
